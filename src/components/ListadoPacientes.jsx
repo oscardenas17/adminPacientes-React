@@ -1,5 +1,5 @@
 
-function ListadoPacientes() {
+const ListadoPacientes = () => {
   return (
     <div>ListadoPacientes</div>
   )

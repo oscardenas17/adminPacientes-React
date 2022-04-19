@@ -1,7 +1,7 @@
 
 function Formulario() {
   return (
-    <div>Formulario</div>
+    <div className="">Formulario</div>
   )
 }
 
