@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import Error from "./Error";
+
 
 function Formulario( {pacientes, setPacientes} ) {
   const [nombre, setNombre] = useState("");
@@ -29,6 +31,12 @@ const objetoPaciente = {
     //console.log(objetoPaciente);
     setPacientes(  [...pacientes, objetoPaciente] )
 
+    //Reiniciar el form
+    setNombre ('')
+    setPropietario('')
+    setEmail('')
+    setFecha('')
+    setSintomas('')
   };
 
   return (
@@ -41,11 +49,11 @@ const objetoPaciente = {
       </p>
 
       <form
-        className="bg-white shadow-md rounded-lg py-10 px-5 mb-10 mx-5"
+        className="bg-white shadow-md rounded-lg py-10 px-5 mb-10"
         onSubmit={handleSubmit}
       >
         {/* //ternario validando error en campo vacio */}
-        {error &&  (<div className="bg-red-800 text-white text-centerp-3 uppercase font-bold mb-3 rounded-md"> <p>Todos los campos son obligatorios</p> </div>) }
+        {error && <p> <Error>Todos los campos son obligatorios</Error> </p> }
 
         <div className="mb-5">
           <label
