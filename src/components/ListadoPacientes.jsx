@@ -1,7 +1,7 @@
 import Paciente from "./Paciente";
 
 //props pacientes viene desde al app
-const ListadoPacientes = ({ pacientes }) => {
+const ListadoPacientes = ({ pacientes, setPaciente }) => {
   return (
     <div className="md:w-1/2 lg:w-3/5 md:h-screen overflow-y-scroll">
       {pacientes && pacientes.length ? (
@@ -14,7 +14,13 @@ const ListadoPacientes = ({ pacientes }) => {
 
           {pacientes.map((paciente) => (
             // se pasa el prop {paciente hacia el componente paciente}
-            <Paciente key={paciente.id} paciente={paciente} />
+            <Paciente 
+              key={paciente.id} 
+              paciente={paciente} 
+
+              //para editAR, AHORA SE ENVIA AL Component paciente el setPaciente
+              setPaciente ={setPaciente}
+            />
           ))}
         </>
       ) : (

@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
 import Error from "./Error";
 
-
-function Formulario( {pacientes, setPacientes} ) {
+function Formulario({ pacientes, setPacientes, paciente }) {
   const [nombre, setNombre] = useState("");
   const [propietario, setPropietario] = useState("");
   const [email, setEmail] = useState("");
@@ -11,43 +10,59 @@ function Formulario( {pacientes, setPacientes} ) {
 
   const [error, setError] = useState(false);
 
-  const generarId = ()=>{
-    const random =  Math.random().toString(36).substring(2)
-    const fecha =  Date.now().toString(36)
+  //Para editar
+  useEffect(() => {
+    // if (Object.keys(paciente).length > 0 ) {
+    //   console.log('algo')
+    // }else{
+    //   console.log('no hay nada')
+    // }
 
-    return random + fecha
-  }
+    if ( Object.keys(paciente).length > 0) {
+      setNombre(paciente.nombre);
+      setPropietario(paciente.propietario);
+      setEmail(paciente.email);
+      setFecha(paciente.fecha);
+      setSintomas(paciente.sintomas);
+    }
+  }, [paciente]);
+
+  const generarId = () => {
+    const random = Math.random().toString(36).substring(2);
+    const fecha = Date.now().toString(36);
+
+    return random + fecha;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if ( [nombre, propietario, email, fecha, sintomas].includes('') ) {
+    if ([nombre, propietario, email, fecha, sintomas].includes("")) {
       setError(true);
-    }else{
+    } else {
       setError(false);
     }
 
-//Objeto de paciente
-const objetoPaciente = {
-  nombre, 
-  propietario, 
-  email, 
-  fecha, 
-  sintomas,
-  id: generarId()
-}
+    //Objeto de paciente
+    const objetoPaciente = {
+      nombre,
+      propietario,
+      email,
+      fecha,
+      sintomas,
+      id: generarId(),
+    };
     //console.log(objetoPaciente);
-    if(objetoPaciente.nombre != ''){
-      setPacientes(  [...pacientes, objetoPaciente] )
+    if (objetoPaciente.nombre != "") {
+      setPacientes([...pacientes, objetoPaciente]);
     }
-    
 
     //Reiniciar el form
-    setNombre ('')
-    setPropietario('')
-    setEmail('')
-    setFecha('')
-    setSintomas('')
+    setNombre("");
+    setPropietario("");
+    setEmail("");
+    setFecha("");
+    setSintomas("");
   };
 
   return (
@@ -64,7 +79,12 @@ const objetoPaciente = {
         onSubmit={handleSubmit}
       >
         {/* //ternario validando error en campo vacio */}
-        {error && <p> <Error>Todos los campos son obligatorios</Error> </p> }
+        {error && (
+          <Error>
+            {" "}
+            <p>Todos los campos son obligatorios </p>{" "}
+          </Error>
+        )}
 
         <div className="mb-5">
           <label
@@ -148,7 +168,7 @@ const objetoPaciente = {
             placeholder="Describe los sintomas"
           />
         </div>
-     
+
         <input
           type="submit"
           value="Agregar Paciente"

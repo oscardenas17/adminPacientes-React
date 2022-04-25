@@ -8,6 +8,9 @@ function App() {
 
   const [pacientes,setPacientes] = useState([]);
 
+  //para editar
+  const [paciente, setPaciente] = useState({});
+
   return (
     <div className='container mx-auto mt-20'>
       <Header />
@@ -16,9 +19,16 @@ function App() {
         <Formulario 
           pacientes={pacientes}
           setPacientes={setPacientes} 
+          //para editar
+          paciente={paciente}
+          setPaciente={setPaciente}
         />
-        <ListadoPacientes 
+
+
+        <ListadoPacientes         
           pacientes={pacientes}
+          //para editar
+          setPaciente={setPaciente} 
         />
       </div>
 
