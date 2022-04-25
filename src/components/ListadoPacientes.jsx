@@ -1,8 +1,8 @@
 import Paciente from "./Paciente"
 
 
-
-const ListadoPacientes = () => {
+//props pacientes viene desde al app
+const ListadoPacientes = ( {pacientes} ) => {
   return (
     <div className="md:w-1/2 lg:w-3/5 md:h-screen overflow-y-scroll">
       
@@ -11,11 +11,17 @@ const ListadoPacientes = () => {
         <span className="text-indigo-600 font-bold">Pacientes y Citas</span>
       </p>
 
-      <Paciente />
-      <Paciente />
-      <Paciente />
-      <Paciente />
-      <Paciente />
+      { pacientes.map( paciente =>(
+
+        // se pasa el prop {paciente hacia el componente paciente}
+       <Paciente 
+       key={paciente.id}
+        paciente={paciente}
+      />
+      ))}
+
+      
+    
    
 
 
