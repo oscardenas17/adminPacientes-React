@@ -37,8 +37,10 @@ const objetoPaciente = {
   id: generarId()
 }
     //console.log(objetoPaciente);
+    if(objetoPaciente.nombre != ''){
+      setPacientes(  [...pacientes, objetoPaciente] )
+    }
     
-    setPacientes(  [...pacientes, objetoPaciente] )
 
     //Reiniciar el form
     setNombre ('')
