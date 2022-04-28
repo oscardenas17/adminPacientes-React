@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import Error from "./Error";
 
-function Formulario({ pacientes, setPacientes, paciente }) {
+//setPaciente prop viene desde app es para editar y limpar el dato editado
+function Formulario({ pacientes, setPacientes, paciente, setPaciente }) {
   const [nombre, setNombre] = useState("");
   const [propietario, setPropietario] = useState("");
   const [email, setEmail] = useState("");
@@ -62,6 +63,9 @@ function Formulario({ pacientes, setPacientes, paciente }) {
       //console.log(paciente)
       const pacientesActualizados = pacientes.map( pacienteState => pacienteState.id === paciente.id ? objetoPaciente : pacienteState)
       setPacientes(pacientesActualizados)
+
+      //se regresa a objeto vacio lo editado
+      setPaciente({})
     }else{
       //nuevo registro
       objetoPaciente.id = generarId();
