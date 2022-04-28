@@ -43,19 +43,35 @@ function Formulario({ pacientes, setPacientes, paciente }) {
       setError(false);
     }
 
-    //Objeto de paciente
+    //Objeto de paciente - en memoria de lo que se lee del formulario
     const objetoPaciente = {
       nombre,
       propietario,
       email,
       fecha,
       sintomas,
-      id: generarId(),
+      //id: generarId(),
     };
-    //console.log(objetoPaciente);
-    if (objetoPaciente.nombre != "") {
+
+    if (paciente.id) {
+      //edit registro
+      objetoPaciente.id = paciente.id
+      //dato editado
+      //console.log(objetoPaciente)
+      //dato antiguo
+      //console.log(paciente)
+      const pacientesActualizados = pacientes.map( pacienteState => pacienteState.id === paciente.id ? objetoPaciente : pacienteState)
+      setPacientes(pacientesActualizados)
+    }else{
+      //nuevo registro
+      objetoPaciente.id = generarId();
       setPacientes([...pacientes, objetoPaciente]);
     }
+
+    //console.log(objetoPaciente);
+    // if (objetoPaciente.nombre != "") {
+    //   setPacientes([...pacientes, objetoPaciente]);
+    // }
 
     //Reiniciar el form
     setNombre("");
