@@ -1,7 +1,8 @@
 import Paciente from "./Paciente";
 
 //props pacientes viene desde al app
-const ListadoPacientes = ({ pacientes, setPaciente }) => {
+//2.borrar extaer id prop y pasarlo por el comp paciente
+const ListadoPacientes = ({ pacientes, setPaciente, eliminarPaciente }) => {
   return (
     <div className="md:w-1/2 lg:w-3/5 md:h-screen overflow-y-scroll">
       {pacientes && pacientes.length ? (
@@ -20,6 +21,9 @@ const ListadoPacientes = ({ pacientes, setPaciente }) => {
 
               //para editAR, AHORA SE ENVIA AL Component paciente el setPaciente
               setPaciente ={setPaciente}
+
+              //2. para eliminar
+              eliminarPaciente={eliminarPaciente}
             />
           ))}
         </>

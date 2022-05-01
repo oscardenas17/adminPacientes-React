@@ -1,6 +1,33 @@
-const Paciente = ( {paciente, setPaciente} ) => {
+//3. eliminarPaciente- Parea eliminar - funcion desde app, va a listado y luego aca para enviar el id
+import Swal from 'sweetalert2'
+import 'sweetalert2/dist/sweetalert2.min.css';
 
-  const {nombre, propietario, email, fecha, sintomas} = paciente
+const Paciente = ( {paciente, setPaciente , eliminarPaciente} ) => {
+
+  const {nombre, propietario, email, fecha, sintomas, id} = paciente
+
+  const handleEliminar = () =>{
+
+    Swal.fire({
+      title: 'Estás seguro de eliminar?',
+      text: "No puedes revertir esta acción!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Si, eliminalo!'
+  }).then((result) => {
+      if (result.isConfirmed) {
+          eliminarPaciente(id);  //llamar el prop y enviar el id
+          Swal.fire(
+          'Eliminado!',
+          'Tu cita se ha eliminado.',
+          'success'
+          )
+      }
+  })
+}
+
   return (
     <div>
       <div className="mx-5 my-10 bg-white shadow-md px-5 py-10 rounded-xl">
@@ -36,7 +63,9 @@ const Paciente = ( {paciente, setPaciente} ) => {
             Editar
           </button>
 
-          <button type="button" className="py-2 px-10 bg-red-600 hover:bg-red-700 text-white font-bold uppercase rounded-lg">
+          <button type="button" className="py-2 px-10 bg-red-600 hover:bg-red-700 text-white font-bold uppercase rounded-lg"
+          onClick={ handleEliminar }
+          >
             Eliminar
           </button>
         </div>
